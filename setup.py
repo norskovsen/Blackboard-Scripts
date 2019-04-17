@@ -18,7 +18,6 @@ setup(
         'requests',
         'simplecrypt',
         'bs4',
-        're',
     ],
     classifiers=[],
 )
