@@ -82,8 +82,9 @@ class BlackboardSession:
                 resp = self.session.get(login_html)
                 break
 
+        auth = self.get_auth()
         print(f"Logging in user {self.username}")
-        resp = self.session.post(resp.url, data=self.get_auth())
+        resp = self.session.post(resp.url, data=auth)
         if "Forkert brugernavn eller kodeord" in resp.text:
             print("Forkert brugernavn eller kodeord")
             self.username = self.set_password = None

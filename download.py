@@ -20,16 +20,20 @@ def locate_pdfs(regex, bb, url):
     urls = []
     for a_elm in body.find_all("a"):
         if len(regex.findall(a_elm.text)) > 0:
-            print(f"Found:{a_elm.text}")
+            print(f"Found: {a_elm.text}")
             names.append(a_elm.text.strip())
-            urls.append(a_elm.get("href"))
+            url = a_elm.get("href")
+            if url[0] == '/':
+                url = MAIN_URL + url
+            print(url)
+            urls.append(url)
     return names, urls
 
 
 def download_pdfs(bb, names, urls):
     for name, url in zip(names, urls):
         print(f"Downloading {name}")
-        resp = bb.get(MAIN_URL + url)
+        resp = bb.get(url)
         with open(name, "wb") as f:
             f.write(resp.content)
 
