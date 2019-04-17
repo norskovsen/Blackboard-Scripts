@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from blackboard import BlackboardSession
 from constants import *
 from bs4 import BeautifulSoup
