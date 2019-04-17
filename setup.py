@@ -6,7 +6,7 @@ os.chdir(os.path.normpath(os.path.dirname(os.path.abspath(__file__))))
 setup(
     name='bbdownload',
     version='0.1',
-    packages=find_packages(include=['blackboard']),
+    packages=find_packages(include=['blackboard.py']),
     include_package_data=True,
     license='GNU GPLv3',
     description='CLI to download files from Blackboard',

@@ -6,7 +6,6 @@ The dependencies for using this package is the following:
   - [Requests](http://docs.python-requests.org/en/master/) for sending request via HTTP
   - [simple-crypt](https://pypi.org/project/simple-crypt/) for encrypting the password file
   - [Beutiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) for parsing HTML
-  - [re](https://docs.python.org/3/library/re.html) for matching filetypes
 
 ## Using the BlackBoardSession class
 The class `BlackBoardSession` takes to keyword arguments one for a `username` and one for a `password`. If they are not supplied it is going to ask for a username and password from the command line.
