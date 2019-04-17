@@ -39,4 +39,7 @@ def download_pdfs(bb, names, urls):
 
 
 if __name__ == "__main__":
-    download_and_find_pdfs(input("Enter url: "), input("Enter file extension: "))
+    try:
+        download_and_find_pdfs(input("Enter url: "), input("Enter file extension: "))
+    except KeyboardInterrupt:
+        pass
