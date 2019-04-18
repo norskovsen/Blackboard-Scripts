@@ -13,7 +13,7 @@ class BlackboardSession:
         self.username = username
         self.password = password
         self.loggedin = False
-        self.updated = False
+        self.updated = True
 
         cj = requests.utils.cookiejar_from_dict(
             {
@@ -29,9 +29,8 @@ class BlackboardSession:
 
     def set_password(self):
         exists = os.path.isfile(PASS_PATH)
-        if not exists or not self.load_password():
+        if not exists or input('Load password [Y/n]? ').strip().lower() == 'n' or not self.load_password():
             self.password = getpass("Enter password: ")
-            self.update = True
 
     def save_password(self):
         file_password = getpass("Enter password for password file: ")
@@ -48,6 +47,7 @@ class BlackboardSession:
         body = self.load_password_file()
         if body[self.username]:
             self.password = body[self.username]
+            self.updated = False
             return True
         return False
 
@@ -87,10 +87,10 @@ class BlackboardSession:
         resp = self.session.post(resp.url, data=auth)
         if "Forkert brugernavn eller kodeord" in resp.text:
             print("Forkert brugernavn eller kodeord")
-            self.username = self.set_password = None
+            self.username = self.password = None
             self.login()
 
-        if self.updated:
+        if self.updated and input('Save password [Y/n]? ').strip().lower() != 'n':
             print("Saving password")
             self.save_password()
 

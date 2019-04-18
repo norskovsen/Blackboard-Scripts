@@ -4,10 +4,18 @@ from blackboard import BlackboardSession
 from constants import *
 from bs4 import BeautifulSoup
 import re
+import argparse
 
 
-def download_and_find_pdfs(url, extension):
-    bb = BlackboardSession()
+def download_and_find_pdfs(result):
+    url, extension = result.url, result.extension
+    if url is None:
+        url = input("Enter url: ")
+    
+    if extension is None:
+        extension = input("Enter extension: ")
+
+    bb = BlackboardSession(username=result.username, password=result.password)
     names, urls = locate_pdfs(re.compile(f".*{extension}"), bb, url)
     download_pdfs(bb, names, urls)
 
@@ -25,7 +33,6 @@ def locate_pdfs(regex, bb, url):
             url = a_elm.get("href")
             if url[0] == '/':
                 url = MAIN_URL + url
-            print(url)
             urls.append(url)
     return names, urls
 
@@ -39,7 +46,16 @@ def download_pdfs(bb, names, urls):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Download files from Blackboard")
+    parser.add_argument('-u', '--user', action='store', dest='username', help = "username for blackboard")
+    parser.add_argument('-p', '--password', action='store', dest='password', help = "password for blackboard")
+    parser.add_argument('-l', '--url' , action='store', dest='url', help="url for blackboard site with links")
+    parser.add_argument('-e', '--extension', action='store', dest='extension', help = "file extension of the given files")
+    parser.add_argument('-v', '--version',action='version',
+                        version='Blackboard Downloader version 0.1')
+    result = parser.parse_args()
+
     try:
-        download_and_find_pdfs(input("Enter url: "), input("Enter file extension: "))
+        download_and_find_pdfs(result)
     except KeyboardInterrupt:
         pass
