@@ -27,7 +27,7 @@ To download a batch from blackboard the download.py file can be used as follows:
 ```
 Just follow the instructions on screen an input the desired URL and file extension
 
-It can be used with the following command line arguments
+It has the following commandline arguments
 ```bash
 usage: download.py [-h] [-u USERNAME] [-p PASSWORD] [-l URL] [-e EXTENSION]
                    [-v]
