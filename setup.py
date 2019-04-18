@@ -18,6 +18,7 @@ setup(
         'requests',
         'simplecrypt',
         'bs4',
+        'argparse',
     ],
     classifiers=[],
 )
